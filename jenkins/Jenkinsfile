@@ -10,7 +10,7 @@ pipeline {
             }
                   
         }
-        stage('Front-end') {
+        stage('Front-End') {
              
               agent {
                 docker { image 'node:7-alpine' }
