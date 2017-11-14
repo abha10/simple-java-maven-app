@@ -1,10 +1,9 @@
 pipeline {
-    agent none
+    agent any
     stages {
         stage('Back-end') {
-        
-            steps {
-               sh 'whoami'
+          steps {
+              sh 'whoami'
               sh 'mvn --version'
             }
                   
