@@ -1,21 +1,10 @@
-def mvnHome
-def labelname = params.labelname
-def build_num
- 
- 
 node ('master') {
     
    stage('Preparation') {
       mvnHome = tool 'maven3'
    }
    stage('Build') {
-      // Run the maven build
-      if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' clean install -DskipTests"
-        
-      } else {
-         bat(/"${mvnHome}\bin\mvn" clean install)
-      }
+      sh 'mvn clean install'
    }
    stage('Results') {
       archive 'jar'
