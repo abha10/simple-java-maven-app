@@ -1,0 +1,17 @@
+node ('master') {
+    def mvnHome
+   stage('Preparation') {
+      mvnHome = tool 'maven3'
+   }
+   stage('Build') {
+      sh "'${mvnHome}/bin/mvn' clean install"
+   }
+   stage('Results') {
+      archive 'target/*.jar'
+   }   
+    stage('Copy Artifact') {
+        node('win-slave'){
+            copyArtifacts filter: 'target/*.jar', fingerprintArtifacts: true, projectName: "${JOB_NAME}", selector: specific("${BUILD_NUMBER}"), target: 'artifacts'
+        }
+   } 
+}
