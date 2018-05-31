@@ -17,12 +17,7 @@ node ('master') {
          bat(/"${mvnHome}\bin\mvn" clean install)
       }
    }
-    
    stage('Results') {
-      
       archive 'jar'
-     
-   }  
- 
-  
+   }   
 }
