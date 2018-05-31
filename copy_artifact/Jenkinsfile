@@ -3,7 +3,7 @@ try {
     node {
         // Main pipeline code goes here
          stage('Build') {
-                sh 'mvn clean install'
+                sh 'maven3 clean install'
         }
         stage('Test') {
                 echo 'Testing..'
