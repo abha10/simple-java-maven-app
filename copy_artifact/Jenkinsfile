@@ -7,6 +7,6 @@ node ('master') {
       sh "'${mvnHome}/bin/mvn' clean install"
    }
    stage('Results') {
-      archive 'jar'
+      archive '*/target/*.jar'
    }   
 }
