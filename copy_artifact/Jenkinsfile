@@ -5,13 +5,5 @@ node ('win-slave') {
    }
    stage('Build') {
       bat(/"${mvnHome}\bin\mvn" clean install)
-   }
-   stage('Results') {
-      archive 'target/*.jar'
-   }   
-    stage('Copy Artifact') {
-        node('master'){
-            copyArtifacts filter: 'target/*.jar', fingerprintArtifacts: true, projectName: "${JOB_NAME}", selector: specific("${BUILD_NUMBER}"), target: 'artifacts'
-        }
    } 
 }
