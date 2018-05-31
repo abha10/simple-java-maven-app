@@ -9,4 +9,9 @@ node ('master') {
    stage('Results') {
       archive 'target/*.jar'
    }   
+    stage('Copy Artifact') {
+        node('win-slave'){
+            copyArtifacts filter: 'target/*.jar', fingerprintArtifacts: true, projectName: "{JOB_NAME}", selector: specific("${BUILD_NUMBER}"), target: 'artifacts'
+        }
+   } 
 }
