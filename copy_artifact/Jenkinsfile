@@ -13,9 +13,7 @@ try {
     err = caughtError
     currentBuild.result = "FAILURE"
 } finally {
-   echo 'afdhnksn'
-    if (err) {
-        throw err
+   echo 'rieghrie'
     }
 }
 
