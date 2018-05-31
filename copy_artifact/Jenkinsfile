@@ -1,6 +1,6 @@
 def err = null
 try {
-    node {
+    node('master') {
         // Main pipeline code goes here
          stage('Build') {
                 sh 'maven3 clean install'
