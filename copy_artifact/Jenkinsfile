@@ -1,18 +1,29 @@
-def err = null
-try {
-    node('master') {
-        // Main pipeline code goes here
-         stage('Build') {
-                sh 'maven3 clean install'
-        }
-        stage('Test') {
-                echo 'Testing..'
-         }
-    }
-} catch (caughtError) { //End of Try
-    err = caughtError
-    currentBuild.result = "FAILURE"
-} finally {
-   echo 'rieghrie'
-    }
-	
+def mvnHome
+def labelname = params.labelname
+def build_num
+ 
+ 
+node ('master') {
+    
+   stage('Preparation') {
+      mvnHome = tool 'maven3'
+   }
+   stage('Build') {
+      // Run the maven build
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' clean install -f trunk/pom.xml"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" clean install -f trunk\/pom.xml/)
+      }
+   }
+    
+   stage('Results') {
+      //junit '**/target/surefire-reports/TEST-*.xml'
+      archive '**/*.jar'
+      //p4tag rawLabelDesc: 'Jenkins post-build label.', rawLabelName: labelname
+      //build_num = env.BUILD_ID
+      //cleanup true
+   }  
+ 
+  
+}
