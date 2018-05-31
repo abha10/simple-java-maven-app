@@ -20,7 +20,7 @@ node ('master') {
     
    stage('Results') {
       
-      archive 'target/*.jar'
+      archive 'jar'
       //p4tag rawLabelDesc: 'Jenkins post-build label.', rawLabelName: labelname
       //build_num = env.BUILD_ID
       //cleanup true
