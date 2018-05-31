@@ -11,14 +11,15 @@ node ('master') {
    stage('Build') {
       // Run the maven build
       if (isUnix()) {
-         sh "'${mvnHome}/bin/mvn' clean install"
+         sh "'${mvnHome}/bin/mvn' clean install -DskipTests"
+        
       } else {
          bat(/"${mvnHome}\bin\mvn" clean install)
       }
    }
     
    stage('Results') {
-      //junit '**/target/surefire-reports/TEST-*.xml'
+      
       archive '**/*.jar'
       //p4tag rawLabelDesc: 'Jenkins post-build label.', rawLabelName: labelname
       //build_num = env.BUILD_ID
