@@ -11,7 +11,7 @@ node ('master') {
    }   
     stage('Copy Artifact') {
         node('win-slave'){
-            copyArtifacts filter: 'target/*.jar', fingerprintArtifacts: true, projectName: "{JOB_NAME}", selector: specific("${BUILD_NUMBER}"), target: 'artifacts'
+            copyArtifacts filter: 'target/*.jar', fingerprintArtifacts: true, projectName: "${JOB_NAME}", selector: specific("${BUILD_NUMBER}"), target: 'artifacts'
         }
    } 
 }
